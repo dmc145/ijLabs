@@ -93,10 +93,10 @@
 				C3533D1117D9E32E0025E45D /* ViewController.h */,
 				C3533D1217D9E32E0025E45D /* ViewController.m */,
 				C3533D1417D9E32E0025E45D /* ViewController.xib */,
-				C3533D0017D9E32E0025E45D /* Supporting Files */,
 				C3533D2017D9EC3D0025E45D /* SecondViewController.h */,
 				C3533D2117D9EC3D0025E45D /* SecondViewController.m */,
 				C3533D2217D9EC3D0025E45D /* SecondViewController.xib */,
+				C3533D0017D9E32E0025E45D /* Supporting Files */,
 			);
 			path = secondone;
 			sourceTree = "<group>";
@@ -308,6 +308,7 @@
 				C3533D1B17D9E32E0025E45D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
