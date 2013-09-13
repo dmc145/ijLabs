@@ -8,6 +8,8 @@
 
 #import "SecondViewController.h"
 
+#import "CustomCell.h"
+
 @interface SecondViewController ()
 
 @end
@@ -47,28 +49,36 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
 }
-/*
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 55;
-}
-*/
 
+# pragma - UITableViewDataSource methods
+    
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    CustomCell *cell = (CustomCell*)[tableView dequeueReusableCellWithIdentifier:@"CustomCell"];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        UIViewController *auxVC = [[UIViewController alloc] initWithNibName:@"CustomCell" bundle:nil];
+        cell = (CustomCell*)auxVC.view;
+        //[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    NSLog(@"section = %d -- row = %d", indexPath.section, indexPath.row);
-    
-    cell.textLabel.text = [_UITableviewExample objectAtIndex:indexPath.row];
+    [[cell _label] setText: [NSString stringWithFormat:@"%@ %d - %@ %d", NSLocalizedString(@"Sección", nil), indexPath.section, NSLocalizedString(@"Fila", nil), indexPath.row]];
+    [[cell _label] setTextColor:[UIColor colorWithRed:60.0/255.0 green:60.0/255.0 blue:59.0/255.0 alpha:1]];
+    /*[[cell _label] setentavo:[UIFont fontWithName:@"Helvetica" size:15]];*/
+    [[cell _label] setShadowColor:[UIColor colorWithRed:190.0/255.0 green:190.0/255.0 blue:191.0/255.0 alpha:1]];
+    [[cell _label] setShadowOffset:CGSizeMake(0, 2)];
     
     return cell;
 }
 
+# pragma - UITableViewDelegate methods
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [[self navigationItem] setTitle: NSLocalizedString(@"Atrás", @"")];
+    
+    SecondViewController *secondViewController = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+    [[self navigationController] pushViewController:secondViewController animated:YES];
+}
 
 @end
