@@ -9,15 +9,39 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "SecondViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    
+    /** Example of Navigation Controller */
+//    UIViewController *firstVC = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+//    self.navigationController = [[UINavigationController alloc] initWithRootViewController:firstVC];
+//    self.window.rootViewController = self.navigationController;
+    /** Instruccion equivalente a las otras dos => no hace falta definir navigationController en .h */
+    //self.window.rootViewController =[[UINavigationController alloc] initWithRootViewController:firstVC];
+    
+
+    /** Example of Tab Bar Controller */
+    UIViewController *firstVC = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    //firstVC.tabBarController.title = @"FirstTab";
+    UITabBarItem *tabBarItem1 = [[UITabBarItem alloc] initWithTitle:@"tabBar1" image:nil tag:1];
+    [firstVC setTabBarItem:tabBarItem1];
+    
+    UIViewController *secondVC = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+    //secondVC.tabBarController.title = @"SecondTab";
+    UITabBarItem *tabBarItem2 = [[UITabBarItem alloc] initWithTitle:@"tabBar2" image:nil tag:2];
+    [secondVC setTabBarItem:tabBarItem2];
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:firstVC, secondVC, nil];
+    [[self tabBarController] setDelegate:self];
+
+    
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
 }

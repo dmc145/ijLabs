@@ -30,10 +30,11 @@
 - (IBAction)doLogin:(id)sender {
     NSLog(@"username = %@", [[self username] text]);
     
-    SecondViewController *loginVC = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    
-    [self presentModalViewController:navController animated:YES];
+    SecondViewController *secondVC = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+
+    [[self navigationController] pushViewController:secondVC animated:YES];
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//    [self presentModalViewController:navController animated:YES];
     //UINavigationController *navController1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
 }
 @end
