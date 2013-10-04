@@ -21,6 +21,8 @@
 		C30CDE1A17F9E42900F2EC50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30CDDFC17F9E42900F2EC50 /* UIKit.framework */; };
 		C30CDE2217F9E42900F2EC50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C30CDE2017F9E42900F2EC50 /* InfoPlist.strings */; };
 		C30CDE2417F9E42900F2EC50 /* WhereamiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C30CDE2317F9E42900F2EC50 /* WhereamiTests.m */; };
+		C30CDE2E17F9E47C00F2EC50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30CDE2D17F9E47C00F2EC50 /* CoreLocation.framework */; };
+		C3B499B017FD87BF00D2A0FE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B499AF17FD87BF00D2A0FE /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		C30CDE1F17F9E42900F2EC50 /* WhereamiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WhereamiTests-Info.plist"; sourceTree = "<group>"; };
 		C30CDE2117F9E42900F2EC50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C30CDE2317F9E42900F2EC50 /* WhereamiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhereamiTests.m; sourceTree = "<group>"; };
+		C30CDE2D17F9E47C00F2EC50 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C3B499AF17FD87BF00D2A0FE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3B499B017FD87BF00D2A0FE /* MapKit.framework in Frameworks */,
+				C30CDE2E17F9E47C00F2EC50 /* CoreLocation.framework in Frameworks */,
 				C30CDDFB17F9E42900F2EC50 /* CoreGraphics.framework in Frameworks */,
 				C30CDDFD17F9E42900F2EC50 /* UIKit.framework in Frameworks */,
 				C30CDDF917F9E42900F2EC50 /* Foundation.framework in Frameworks */,
@@ -101,6 +107,8 @@
 		C30CDDF717F9E42900F2EC50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3B499AF17FD87BF00D2A0FE /* MapKit.framework */,
+				C30CDE2D17F9E47C00F2EC50 /* CoreLocation.framework */,
 				C30CDDF817F9E42900F2EC50 /* Foundation.framework */,
 				C30CDDFA17F9E42900F2EC50 /* CoreGraphics.framework */,
 				C30CDDFC17F9E42900F2EC50 /* UIKit.framework */,
@@ -461,6 +469,7 @@
 				C30CDE2917F9E42900F2EC50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C30CDE2A17F9E42900F2EC50 /* Build configuration list for PBXNativeTarget "WhereamiTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +478,7 @@
 				C30CDE2C17F9E42900F2EC50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
