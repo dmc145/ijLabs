@@ -20,6 +20,8 @@
 		C3533D1617D9E32E0025E45D /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3533D1417D9E32E0025E45D /* ViewController.xib */; };
 		C3533D2317D9EC3D0025E45D /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3533D2117D9EC3D0025E45D /* SecondViewController.m */; };
 		C3533D2417D9EC3D0025E45D /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3533D2217D9EC3D0025E45D /* SecondViewController.xib */; };
+		D3A19EBD17E32A9F00344B37 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A19EBC17E32A9F00344B37 /* CustomCell.m */; };
+		D3A19EBF17E32ADF00344B37 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A19EBE17E32ADF00344B37 /* CustomCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,9 @@
 		C3533D2017D9EC3D0025E45D /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		C3533D2117D9EC3D0025E45D /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		C3533D2217D9EC3D0025E45D /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
+		D37A68AF17E3301C00A01E79 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/CustomCell.h; sourceTree = "<group>"; };
+		D3A19EBC17E32A9F00344B37 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		D3A19EBE17E32ADF00344B37 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,9 @@
 		C3533CFF17D9E32E0025E45D /* secondone */ = {
 			isa = PBXGroup;
 			children = (
+				D37A68B017E3301C00A01E79 /* CustomCell.h */,
+				D3A19EBC17E32A9F00344B37 /* CustomCell.m */,
+				D3A19EBE17E32ADF00344B37 /* CustomCell.xib */,
 				C3533D0817D9E32E0025E45D /* AppDelegate.h */,
 				C3533D0917D9E32E0025E45D /* AppDelegate.m */,
 				C3533D1117D9E32E0025E45D /* ViewController.h */,
@@ -172,6 +180,7 @@
 				C3533D1017D9E32E0025E45D /* Default-568h@2x.png in Resources */,
 				C3533D1617D9E32E0025E45D /* ViewController.xib in Resources */,
 				C3533D2417D9EC3D0025E45D /* SecondViewController.xib in Resources */,
+				D3A19EBF17E32ADF00344B37 /* CustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +195,7 @@
 				C3533D0A17D9E32E0025E45D /* AppDelegate.m in Sources */,
 				C3533D1317D9E32E0025E45D /* ViewController.m in Sources */,
 				C3533D2317D9EC3D0025E45D /* SecondViewController.m in Sources */,
+				D3A19EBD17E32A9F00344B37 /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,6 +216,14 @@
 				C3533D1517D9E32E0025E45D /* en */,
 			);
 			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+		D37A68B017E3301C00A01E79 /* CustomCell.h */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D37A68AF17E3301C00A01E79 /* en */,
+			);
+			name = CustomCell.h;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
