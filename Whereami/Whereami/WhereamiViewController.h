@@ -10,18 +10,27 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@interface WhereamiViewController : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate>
+@interface WhereamiViewController : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate, UITextFieldDelegate>
 
 {
     CLLocationManager *locationManager;
     
+    // For Chap.5...
     IBOutlet MKMapView *worldView;
     IBOutlet UIActivityIndicatorView *activityIndicator;
     IBOutlet UITextField *locationTitleField;
+    
+    IBOutlet UISegmentedControl *segmentedControl;
 }
 
 /*
 - (void) doSomethingWeird;
  */
+
+- (void)findLocation;
+- (void)foundLocation:(CLLocation *)loc;
+
+/* Chap.5 Silver */
+- (IBAction)changeMapType:(id)sender;
 
 @end

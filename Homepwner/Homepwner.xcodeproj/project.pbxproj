@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		C3995EAD1806AC2C00AA35C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3995EAB1806AC2C00AA35C0 /* DetailViewController.m */; };
 		C3995EAE1806AC2C00AA35C0 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3995EAC1806AC2C00AA35C0 /* DetailViewController.xib */; };
+		C3995EB21806E24300AA35C0 /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3995EB01806E24300AA35C0 /* DateViewController.m */; };
+		C3995EB31806E24300AA35C0 /* DateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3995EB11806E24300AA35C0 /* DateViewController.xib */; };
+		C3A3143D1807FB410078785D /* BNRImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A3143C1807FB410078785D /* BNRImageStore.m */; };
+		C3A3143F180BD1DE0078785D /* CrossHair.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A3143E180BD1DE0078785D /* CrossHair.xib */; };
 		C3A4EE381805571700730E3F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A4EE371805571700730E3F /* Foundation.framework */; };
 		C3A4EE3A1805571700730E3F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A4EE391805571700730E3F /* CoreGraphics.framework */; };
 		C3A4EE3C1805571700730E3F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A4EE3B1805571700730E3F /* UIKit.framework */; };
@@ -41,6 +45,12 @@
 		C3995EAA1806AC2C00AA35C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		C3995EAB1806AC2C00AA35C0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		C3995EAC1806AC2C00AA35C0 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		C3995EAF1806E24300AA35C0 /* DateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateViewController.h; sourceTree = "<group>"; };
+		C3995EB01806E24300AA35C0 /* DateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateViewController.m; sourceTree = "<group>"; };
+		C3995EB11806E24300AA35C0 /* DateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateViewController.xib; sourceTree = "<group>"; };
+		C3A3143B1807FB410078785D /* BNRImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRImageStore.h; sourceTree = "<group>"; };
+		C3A3143C1807FB410078785D /* BNRImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRImageStore.m; sourceTree = "<group>"; };
+		C3A3143E180BD1DE0078785D /* CrossHair.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CrossHair.xib; sourceTree = "<group>"; };
 		C3A4EE341805571700730E3F /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3A4EE371805571700730E3F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C3A4EE391805571700730E3F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,18 +135,24 @@
 			children = (
 				C3A4EE6C18055DA300730E3F /* BNRItem.h */,
 				C3A4EE6D18055DA300730E3F /* BNRItem.m */,
+				C3A4EE6F18055E7800730E3F /* BNRItemStore.h */,
+				C3A4EE7018055E7800730E3F /* BNRItemStore.m */,
+				C3A3143B1807FB410078785D /* BNRImageStore.h */,
+				C3A3143C1807FB410078785D /* BNRImageStore.m */,
 				C3A4EE7218058C8E00730E3F /* HeaderView.xib */,
 				C3A4EE691805579600730E3F /* ItemsViewController.h */,
 				C3A4EE6A1805579600730E3F /* ItemsViewController.m */,
-				C3A4EE461805571700730E3F /* HomepwnerAppDelegate.h */,
-				C3A4EE471805571700730E3F /* HomepwnerAppDelegate.m */,
 				C3995EAA1806AC2C00AA35C0 /* DetailViewController.h */,
 				C3995EAB1806AC2C00AA35C0 /* DetailViewController.m */,
+				C3A3143E180BD1DE0078785D /* CrossHair.xib */,
 				C3995EAC1806AC2C00AA35C0 /* DetailViewController.xib */,
+				C3995EAF1806E24300AA35C0 /* DateViewController.h */,
+				C3995EB01806E24300AA35C0 /* DateViewController.m */,
+				C3995EB11806E24300AA35C0 /* DateViewController.xib */,
+				C3A4EE461805571700730E3F /* HomepwnerAppDelegate.h */,
+				C3A4EE471805571700730E3F /* HomepwnerAppDelegate.m */,
 				C3A4EE491805571700730E3F /* Images.xcassets */,
 				C3A4EE3E1805571700730E3F /* Supporting Files */,
-				C3A4EE6F18055E7800730E3F /* BNRItemStore.h */,
-				C3A4EE7018055E7800730E3F /* BNRItemStore.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -250,6 +266,8 @@
 				C3A4EE421805571700730E3F /* InfoPlist.strings in Resources */,
 				C3A4EE4A1805571700730E3F /* Images.xcassets in Resources */,
 				C3995EAE1806AC2C00AA35C0 /* DetailViewController.xib in Resources */,
+				C3A3143F180BD1DE0078785D /* CrossHair.xib in Resources */,
+				C3995EB31806E24300AA35C0 /* DateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,8 +290,10 @@
 				C3A4EE6B1805579600730E3F /* ItemsViewController.m in Sources */,
 				C3A4EE6E18055DA300730E3F /* BNRItem.m in Sources */,
 				C3A4EE481805571700730E3F /* HomepwnerAppDelegate.m in Sources */,
+				C3A3143D1807FB410078785D /* BNRImageStore.m in Sources */,
 				C3A4EE441805571700730E3F /* main.m in Sources */,
 				C3995EAD1806AC2C00AA35C0 /* DetailViewController.m in Sources */,
+				C3995EB21806E24300AA35C0 /* DateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

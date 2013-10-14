@@ -7,32 +7,24 @@
 //
 
 #import "DateViewController.h"
-
-@interface DateViewController ()
-
-@end
+#import "BNRItem.h"
 
 @implementation DateViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize item;
+
+- (void)viewWillAppear:(BOOL)animated
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    [super viewWillAppear:animated];
+    
+    [datePicker setDate:[item dateCreated]];
 }
 
-- (void)viewDidLoad
+-(void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewWillDisappear:animated];
+    
+    [item setDateCreated:[datePicker date]];
 }
 
 @end

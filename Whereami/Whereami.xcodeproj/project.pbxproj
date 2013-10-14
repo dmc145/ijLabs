@@ -23,6 +23,7 @@
 		C30CDE2417F9E42900F2EC50 /* WhereamiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C30CDE2317F9E42900F2EC50 /* WhereamiTests.m */; };
 		C30CDE2E17F9E47C00F2EC50 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30CDE2D17F9E47C00F2EC50 /* CoreLocation.framework */; };
 		C3B499B017FD87BF00D2A0FE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B499AF17FD87BF00D2A0FE /* MapKit.framework */; };
+		C3B499B317FDA9D100D2A0FE /* BNRMapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B499B217FDA9D100D2A0FE /* BNRMapPoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		C30CDE2317F9E42900F2EC50 /* WhereamiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhereamiTests.m; sourceTree = "<group>"; };
 		C30CDE2D17F9E47C00F2EC50 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C3B499AF17FD87BF00D2A0FE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C3B499B117FDA9D100D2A0FE /* BNRMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRMapPoint.h; sourceTree = "<group>"; };
+		C3B499B217FDA9D100D2A0FE /* BNRMapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRMapPoint.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,9 @@
 		C30CDDFE17F9E42900F2EC50 /* Whereami */ = {
 			isa = PBXGroup;
 			children = (
+				C3A31443180BF67B0078785D /* iPad */,
+				C3B499B117FDA9D100D2A0FE /* BNRMapPoint.h */,
+				C3B499B217FDA9D100D2A0FE /* BNRMapPoint.m */,
 				C30CDE0717F9E42900F2EC50 /* WhereamiAppDelegate.h */,
 				C30CDE0817F9E42900F2EC50 /* WhereamiAppDelegate.m */,
 				C30CDE0A17F9E42900F2EC50 /* Main.storyboard */,
@@ -158,6 +164,13 @@
 				C30CDE2017F9E42900F2EC50 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C3A31443180BF67B0078785D /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +273,7 @@
 			files = (
 				C30CDE0917F9E42900F2EC50 /* WhereamiAppDelegate.m in Sources */,
 				C30CDE0517F9E42900F2EC50 /* main.m in Sources */,
+				C3B499B317FDA9D100D2A0FE /* BNRMapPoint.m in Sources */,
 				C30CDE0F17F9E42900F2EC50 /* WhereamiViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +404,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Whereami/Whereami-Prefix.pch";
 				INFOPLIST_FILE = "Whereami/Whereami-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -403,7 +419,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Whereami/Whereami-Prefix.pch";
 				INFOPLIST_FILE = "Whereami/Whereami-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

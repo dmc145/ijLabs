@@ -7,6 +7,7 @@
 //
 
 #import "WhereamiViewController.h"
+#import "BNRMapPoint.h"
 
 @implementation WhereamiViewController
 
@@ -52,6 +53,13 @@
            fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"[NEW location: %@]", newLocation);
+    
+    // For Chap.5...
+    NSTimeInterval t = [[newLocation timestamp] timeIntervalSinceNow];
+    if (t < -180) {
+        return;
+    }
+    [self foundLocation:newLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -92,6 +100,9 @@
 - (void)viewDidLoad
 {
     [worldView setShowsUserLocation:YES];
+
+    // Chap.5 Bronze Challenge...
+    [worldView setMapType:MKMapTypeSatellite];
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -101,6 +112,48 @@
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc, 250, 250);
     [worldView setRegion:region animated:YES];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self findLocation];
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+- (void)findLocation
+{
+    [locationManager startUpdatingLocation];
+    [activityIndicator startAnimating];
+    [locationTitleField setHidden:YES];
+}
+
+- (void)foundLocation:(CLLocation *)loc
+{
+    CLLocationCoordinate2D coord = [loc coordinate];
+    BNRMapPoint *mp = [[BNRMapPoint alloc] initWithCoordinate:coord title:[locationTitleField text]];
+    
+    // Add to map view
+    [worldView addAnnotation:mp];
+    
+    // Zoom...
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord, 250, 250);
+    [worldView setRegion:region animated:YES];
+ 
+    // UI reset...
+    [locationTitleField setText:@""];
+    [activityIndicator stopAnimating];
+    [locationTitleField setHidden:NO];
+    [locationManager stopUpdatingLocation];
+}
+
+/* Chap.5 Silver Challenge*/
+- (IBAction)changeMapType:(id)sender
+{
+    NSLog(@"\n...doChangeMapType...\nfrom %u to %ld", [worldView mapType], (long)[segmentedControl selectedSegmentIndex]);
+    
+    [worldView setMapType:[segmentedControl selectedSegmentIndex]];
 }
 
 

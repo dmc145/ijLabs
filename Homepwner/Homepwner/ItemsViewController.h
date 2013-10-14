@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ItemsViewController : UITableViewController<UITableViewDataSource>
+@interface ItemsViewController : UITableViewController <UITableViewDataSource>
 
 {
     //IBOutlet UIView *headerView;
