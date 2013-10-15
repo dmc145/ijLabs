@@ -28,7 +28,12 @@
          */
         
         UINavigationItem *n = [self navigationItem];
-        [n setTitle:@"Homepwner"];
+
+        /* Chap. 17
+         [n setTitle:@"Homepwner"];
+         */
+        [n setTitle:NSLocalizedString(@"Homepwner", @"Name of application")];
+
         
         // Create a new bar button item that will send
         // addNewItem: to ItemsViewController
@@ -107,8 +112,16 @@
         // Configure the cell with the BNRItem
         [[cell nameLabel] setText:[p itemName]];
         [[cell serialNumberLabel] setText:[p serialNumber]];
+
+        /* Chap. 17
         [[cell valueLabel] setText:
          [NSString stringWithFormat:@"$%d", [p valueInDollars]]];
+         */
+        NSString *currencySymbol = [[NSLocale currentLocale]
+                                    objectForKey:NSLocaleCurrencySymbol];
+        [[cell valueLabel] setText:[NSString stringWithFormat:@"%@%d",
+                                    currencySymbol,
+                                    [p valueInDollars]]];
 
         [[cell thumbnailView] setImage:[p thumbnail]];
         
