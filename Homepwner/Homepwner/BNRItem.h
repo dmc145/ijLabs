@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BNRItem : NSObject
+@interface BNRItem : NSObject <NSCoding>
 {
 }
 
@@ -27,5 +27,10 @@
 @property (nonatomic, copy) NSDate *dateCreated;
 
 @property (nonatomic, copy) NSString *imageKey;
+
+@property (nonatomic, strong) UIImage *thumbnail;
+@property (nonatomic, strong) NSData *thumbnailData;
+
+- (void)setThumbnailDataFromImage:(UIImage *)image;
 
 @end

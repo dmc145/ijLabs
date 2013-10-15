@@ -10,7 +10,7 @@
 
 @class BNRItem;
 
-@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+@interface DetailViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
 
 {
     __weak IBOutlet UITextField *nameField;
@@ -19,16 +19,20 @@
     __weak IBOutlet UILabel *dateLabel;
     
     __weak IBOutlet UIImageView *imageView;
+    
+    UIPopoverController *imagePickerPopover;
 }
 
 @property (nonatomic, strong) BNRItem *item;
 
 @property (nonatomic) IBOutlet UIView *overlayView;
 
+@property (nonatomic, copy) void (^dismissBlock)(void);
 
 - (IBAction)changeDate:(id)sender;
 - (IBAction)takePicture:(id)sender;
 - (IBAction)backgroundTapped:(id)sender;
 - (IBAction)clearImage:(id)sender;
+- (id)initForNewItem:(BOOL)isNew;
 
 @end

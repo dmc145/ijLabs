@@ -10,11 +10,15 @@
 #import "BNRItem.h"
 #import "DateViewController.h"
 #import "BNRImageStore.h"
+#import "CrossHairs.h"
+#import "BNRItemStore.h"
 
 
 @implementation DetailViewController
 
 @synthesize item;
+@synthesize dismissBlock;
+
 
 - (void)setItem:(BNRItem *)i
 {
@@ -25,7 +29,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[self view] setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    
+    UIColor *clr = nil;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        clr = [UIColor colorWithRed:0.875 green:0.88 blue:0.91 alpha:1];
+    } else {
+        clr = [UIColor groupTableViewBackgroundColor];
+    }
+    [[self view] setBackgroundColor:clr];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -98,6 +109,17 @@
 
 - (IBAction)takePicture:(id)sender {
     
+    /* Chap. 13
+     If the UIPopoverController is visible and the user taps on the camera button again, the application will crash
+     */
+    if ([imagePickerPopover isPopoverVisible]) {
+        // If the popover is already up, get rid of it
+        [imagePickerPopover dismissPopoverAnimated:YES];
+        imagePickerPopover = nil;
+        return;
+    }
+    /* */
+    
     UIImagePickerController *imagePicker =
     [[UIImagePickerController alloc] init];
     
@@ -107,10 +129,19 @@
          isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
 
-        /*
+        /* Chap. 12 Gold Challenge
+         
         [[NSBundle mainBundle] loadNibNamed:@"CrossHair" owner:self options:nil];
         [imagePicker setCameraOverlayView:[self overlayView]];
          */
+        CrossHairs *reticle = [[CrossHairs alloc]
+                               initWithFrame:CGRectMake(imagePicker.view.frame.origin.x,
+                                                        imagePicker.view.frame.origin.y,
+                                                        imagePicker.view.frame.size.width,
+                                                        imagePicker.view.frame.size.height-
+                                                        imagePicker.toolbar.frame.size.height)];
+        [imagePicker setCameraOverlayView:reticle];
+        /* */
         
     } else {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
@@ -123,8 +154,30 @@
     [imagePicker setAllowsEditing:YES];
     /* */
     
+    /* Chap. 13 */
     // Place image picker on the screen
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    //[self presentViewController:imagePicker animated:YES completion:nil];
+    
+    // Check for iPad device before instantiating the popover controller
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        // Create a new popover controller that will display the imagePicker
+        imagePickerPopover = [[UIPopoverController alloc]
+                              initWithContentViewController:imagePicker];
+        
+        [imagePickerPopover setDelegate:self];
+        
+        NSLog(@"popoverBackgroundViewClass: %@", [imagePickerPopover popoverBackgroundViewClass]);
+        
+        
+        // Display the popover controller; sender
+        // is the camera bar button item
+        [imagePickerPopover presentPopoverFromBarButtonItem:sender
+                                   permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                   animated:YES];
+    } else {
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    /* */
 }
 
 - (IBAction)backgroundTapped:(id)sender {
@@ -148,6 +201,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
     // Chap. 12 Bronze Challenge
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    [item setThumbnailDataFromImage:image];
     
     // Create a CFUUID object - it knows how to create unique identifier strings
     CFUUIDRef newUniqueID = CFUUIDCreate(kCFAllocatorDefault);
@@ -187,6 +242,69 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     [item setImageKey:nil];
     
     [imageView setImage:nil];
+}
+
+#pragma-mark Chap. 13
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return (io == UIInterfaceOrientationPortrait);
+    }
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    NSLog(@"User dismissed popover");
+    imagePickerPopover = nil;
+}
+
+- (id)initForNewItem:(BOOL)isNew
+{
+    self = [super initWithNibName:@"DetailViewController" bundle:nil];
+    
+    if (self) {
+        if (isNew) {
+            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc]
+                                         initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                         target:self
+                                         action:@selector(save:)];
+            [[self navigationItem] setRightBarButtonItem:doneItem];
+            
+            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc]
+                                           initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                           target:self
+                                           action:@selector(cancel:)];
+            [[self navigationItem] setLeftBarButtonItem:cancelItem];
+        }
+    }
+    
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
+{
+    @throw [NSException exceptionWithName:@"Wrong initializer"
+                                   reason:@"Use initForNewItem:"
+                                 userInfo:nil];
+    return nil;
+}
+
+- (void)save:(id)sender
+{
+    [[self presentingViewController] dismissViewControllerAnimated:YES
+                                                        completion:dismissBlock];
+}
+
+- (void)cancel:(id)sender
+{
+    // If the user cancelled, then remove the BNRItem from the store
+    [[BNRItemStore sharedStore] removeItem:item];
+    
+    [[self presentingViewController] dismissViewControllerAnimated:YES
+                                                        completion:dismissBlock];
 }
 
 @end

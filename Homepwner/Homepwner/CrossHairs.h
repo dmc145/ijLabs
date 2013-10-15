@@ -10,4 +10,10 @@
 
 @interface CrossHairs : UIView
 
+{
+    
+}
+
+@property (nonatomic, strong) UIColor *crossHairColor;
+
 @end

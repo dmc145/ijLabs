@@ -10,6 +10,7 @@
 #import "BNRItemStore.h"
 #import "BNRItem.h"
 #import "DetailViewController.h"
+#import "HomepwnerItemCell.h"
 
 @implementation ItemsViewController
 
@@ -50,9 +51,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    int i = [[[BNRItemStore sharedStore] allItems] count]+1;
-    NSLog(@"Total rows + 1 = %d",i);
-    
+    int i = [[[BNRItemStore sharedStore] allItems] count] + 1; // +1 for Chap. 9 Silver Challenge
     return i;
 }
 
@@ -66,6 +65,7 @@
                            reuseIdentifier:@"UITableViewCell"];
      */
     
+    /* Chap. 15
     // Check for a reusable cell first, use that if it exists
     UITableViewCell *cell =
     [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
@@ -76,11 +76,17 @@
                 initWithStyle:UITableViewCellStyleDefault
                 reuseIdentifier:@"UITableViewCell"];
     }
+     */
+    // Get the new or recycled cell
+    HomepwnerItemCell *cell = [tableView
+                               dequeueReusableCellWithIdentifier:@"HomepwnerItemCell"];
+    
+    [cell setController:self];
+    [cell setTableView:tableView];
 
 
     if ([indexPath row] == [[[BNRItemStore sharedStore] allItems] count]) {
         /* Chap. 9 Silver Challenge */
-        NSLog(@"Searching for index %d in array of %d items", [indexPath row], [[[BNRItemStore sharedStore] allItems] count]);
         [[cell textLabel] setText:@"No more items!"];
         
     } else {
@@ -91,7 +97,19 @@
         BNRItem *p = [[[BNRItemStore sharedStore] allItems]
                       objectAtIndex:[indexPath row]];
         
+        /* Chap. 15
         [[cell textLabel] setText:[p description]];
+         */
+        
+        // Configure the cell with the BNRItem
+        [[cell nameLabel] setText:[p itemName]];
+        [[cell serialNumberLabel] setText:[p serialNumber]];
+        [[cell valueLabel] setText:
+         [NSString stringWithFormat:@"$%d", [p valueInDollars]]];
+
+        [[cell thumbnailView] setImage:[p thumbnail]];
+        
+        /* */
     }
     
     return cell;
@@ -151,6 +169,7 @@
     // Create a new BNRItem and add it to the store
     BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
     
+    /* Chap. 13
     // Figure out where that item is in the array
     int lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
 
@@ -160,6 +179,22 @@
     // Insert this new row into the table.
     [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:ip]
                             withRowAnimation:UITableViewRowAnimationTop];
+     */
+    DetailViewController *detailViewController = [[DetailViewController alloc] initForNewItem:YES];
+    
+    [detailViewController setItem:newItem];
+    [detailViewController setDismissBlock:^{
+        [[self tableView] reloadData];
+    }];
+    
+    UINavigationController *navController = [[UINavigationController alloc]
+                                             initWithRootViewController:detailViewController];
+    
+    [navController setModalPresentationStyle:UIModalPresentationFullScreen];
+    [navController setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+    
+    [self presentViewController:navController animated:YES completion:nil];
+    /* */
 }
 
 - (void)tableView:(UITableView *)tableView
@@ -236,7 +271,10 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 - (void)tableView:(UITableView *)aTableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    /* Chap. 13 */
+    //DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    DetailViewController *detailViewController = [[DetailViewController alloc] initForNewItem:NO];
+    /* */
     
     NSArray *items = [[BNRItemStore sharedStore] allItems];
     BNRItem *selectedItem = [items objectAtIndex:[indexPath row]];
@@ -253,6 +291,36 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [super viewWillAppear:animated];
     [[self tableView] reloadData];
+}
+
+#pragma-mark Chap. 13
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return YES;
+    } else {
+        return (io == UIInterfaceOrientationPortrait);
+    }
+}
+
+#pragma-mark Chap. 15
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Load the NIB file
+    UINib *nib = [UINib nibWithNibName:@"HomepwnerItemCell" bundle:nil];
+    
+    // Register this NIB which contains the cell
+    [[self tableView] registerNib:nib
+           forCellReuseIdentifier:@"HomepwnerItemCell"];
+}
+
+- (void)showImage:(id)sender atIndexPath:(NSIndexPath *)ip
+{
+    NSLog(@"Going to show the image for %@", ip);
 }
 
 @end
