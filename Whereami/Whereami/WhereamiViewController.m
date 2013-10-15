@@ -9,6 +9,8 @@
 #import "WhereamiViewController.h"
 #import "BNRMapPoint.h"
 
+NSString * const WhereamiMapTypePrefKey = @"WhereamiMapTypePrefKey";
+
 @implementation WhereamiViewController
 
 - (id)initWithCoder:(NSCoder *) aDecoder
@@ -100,9 +102,15 @@
 - (void)viewDidLoad
 {
     [worldView setShowsUserLocation:YES];
-
-    // Chap.5 Bronze Challenge...
-    [worldView setMapType:MKMapTypeSatellite];
+    
+    NSInteger mapTypeValue = [[NSUserDefaults standardUserDefaults]
+                              integerForKey:WhereamiMapTypePrefKey];
+    
+    // Update the UI
+    [segmentedControl setSelectedSegmentIndex:mapTypeValue];
+    
+    // Update the map
+    [self changeMapType:segmentedControl];
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
@@ -148,12 +156,45 @@
     [locationManager stopUpdatingLocation];
 }
 
-/* Chap.5 Silver Challenge*/
+#pragma-mark Chap. 18
+
 - (IBAction)changeMapType:(id)sender
 {
+    /* Chap.5 Silver Challenge
     NSLog(@"\n...doChangeMapType...\nfrom %u to %ld", [worldView mapType], (long)[segmentedControl selectedSegmentIndex]);
-    
     [worldView setMapType:[segmentedControl selectedSegmentIndex]];
+     */
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:[sender selectedSegmentIndex]
+                                               forKey:WhereamiMapTypePrefKey];
+
+    
+    switch ([sender selectedSegmentIndex])
+    {
+        case 0:
+        {
+            [worldView setMapType:MKMapTypeStandard];
+        } break;
+        case 1:
+        {
+            [worldView setMapType:MKMapTypeSatellite];
+        } break;
+        case 2:
+        {
+            [worldView setMapType:MKMapTypeHybrid];
+        } break;
+    }
+}
+
+/*
+ override the class method initialize to register defaults, including setting the map type preference to 1
+ */
++ (void)initialize
+{
+    NSDictionary *defaults = [NSDictionary
+                              dictionaryWithObject:[NSNumber numberWithInt:1]
+                              forKey:WhereamiMapTypePrefKey];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 

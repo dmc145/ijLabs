@@ -20,7 +20,7 @@
     IBOutlet UIActivityIndicatorView *activityIndicator;
     IBOutlet UITextField *locationTitleField;
     
-    IBOutlet UISegmentedControl *segmentedControl;
+    __weak IBOutlet UISegmentedControl *segmentedControl;
 }
 
 /*
