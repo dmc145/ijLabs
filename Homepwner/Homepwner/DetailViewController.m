@@ -51,7 +51,9 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    [dateLabel setText:[dateFormatter stringFromDate:[item dateCreated]]];
+    // Convert time interval to NSDate
+    NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:[item dateCreated]];
+    [dateLabel setText:[dateFormatter stringFromDate:date]];
     
     /* Chap. 12 */
     NSString *imageKey = [item imageKey];
@@ -154,10 +156,10 @@
     [imagePicker setAllowsEditing:YES];
     /* */
     
-    /* Chap. 13 */
-    // Place image picker on the screen
-    //[self presentViewController:imagePicker animated:YES completion:nil];
     
+    // Place image picker on the screen
+    // [self presentViewController:imagePicker animated:YES completion:nil];
+    /* Chap. 13 */
     // Check for iPad device before instantiating the popover controller
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         // Create a new popover controller that will display the imagePicker

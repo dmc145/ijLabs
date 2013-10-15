@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @class BNRItem;
 
@@ -15,6 +16,10 @@
 
 {
     NSMutableArray *allItems;
+    
+    NSMutableArray *allAssetTypes;
+    NSManagedObjectContext *context;
+    NSManagedObjectModel *model;
 }
 
 // Notice that this is a class method and prefixed with a + instead of a -
@@ -29,6 +34,7 @@
 - (NSString *)itemArchivePath;
 - (BOOL)saveChanges;
 
-
+- (void)loadAllItems;
+- (NSArray *)allAssetTypes;
 
 @end

@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ItemsViewController : UITableViewController <UITableViewDataSource>
+@interface ItemsViewController : UITableViewController <UITableViewDataSource, UIPopoverControllerDelegate>
 
 {
     //IBOutlet UIView *headerView;
+    UIPopoverController *imagePopover;
+
 }
 
 //- (UIView *)headerView;

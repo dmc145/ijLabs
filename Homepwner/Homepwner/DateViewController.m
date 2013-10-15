@@ -17,14 +17,15 @@
 {
     [super viewWillAppear:animated];
     
-    [datePicker setDate:[item dateCreated]];
+    NSDate *date = [NSDate dateWithTimeIntervalSinceReferenceDate:[item dateCreated]];
+    [datePicker setDate:date];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    [item setDateCreated:[datePicker date]];
+    [item setDateCreated:[[datePicker date] timeIntervalSinceReferenceDate]];
 }
 
 @end
