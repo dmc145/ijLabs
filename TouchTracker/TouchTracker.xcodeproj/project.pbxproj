@@ -21,6 +21,7 @@
 		C320E9CB180D91C200C967BF /* TouchTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C320E9CA180D91C200C967BF /* TouchTrackerTests.m */; };
 		C320E9D6180D91E500C967BF /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = C320E9D5180D91E500C967BF /* Line.m */; };
 		C320E9D9180D922800C967BF /* TouchDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = C320E9D8180D922800C967BF /* TouchDrawView.m */; };
+		C320E9DC180D928B00C967BF /* TouchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C320E9DB180D928B00C967BF /* TouchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		C320E9D5180D91E500C967BF /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		C320E9D7180D922800C967BF /* TouchDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchDrawView.h; path = ../TouchDrawView.h; sourceTree = "<group>"; };
 		C320E9D8180D922800C967BF /* TouchDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchDrawView.m; path = ../TouchDrawView.m; sourceTree = "<group>"; };
+		C320E9DA180D928B00C967BF /* TouchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchViewController.h; sourceTree = "<group>"; };
+		C320E9DB180D928B00C967BF /* TouchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 				C320E9D5180D91E500C967BF /* Line.m */,
 				C320E9D7180D922800C967BF /* TouchDrawView.h */,
 				C320E9D8180D922800C967BF /* TouchDrawView.m */,
+				C320E9DA180D928B00C967BF /* TouchViewController.h */,
+				C320E9DB180D928B00C967BF /* TouchViewController.m */,
 			);
 			path = TouchTracker;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C320E9B6180D91C200C967BF /* AppDelegate.m in Sources */,
+				C320E9DC180D928B00C967BF /* TouchViewController.m in Sources */,
 				C320E9D6180D91E500C967BF /* Line.m in Sources */,
 				C320E9D9180D922800C967BF /* TouchDrawView.m in Sources */,
 				C320E9B2180D91C200C967BF /* main.m in Sources */,

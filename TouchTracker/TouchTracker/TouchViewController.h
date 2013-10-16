@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TouchViewController : NSObject
+@interface TouchViewController : UIViewController
 
 @end
