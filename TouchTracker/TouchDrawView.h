@@ -1,0 +1,18 @@
+//
+//  TouchDrawView.h
+//  TouchTracker
+//
+//  Created by Daniel Muñoz on 15/10/13.
+//  Copyright (c) 2013 Daniel Muñoz. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface TouchDrawView : UIView
+
+{
+    NSMutableDictionary *linesInProcess;
+    NSMutableArray *completeLines;
+}
+
+@end
