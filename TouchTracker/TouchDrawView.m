@@ -92,6 +92,13 @@
         CGContextStrokePath(context);
     }
     
+    /* Chap. 21 Wasting time for Instruments
+    float f = 0.0;
+    for (int i = 0; i < 100000; i++) {
+        f = f + sin(sin(time(NULL) + i));
+    }
+    NSLog(@"f = %f", f);
+    */
 }
 
 - (void)clearAll
@@ -323,6 +330,19 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)other
     
     // The superclass' implementation will return YES if the method is in the .m file
     return [super canPerformAction:action withSender:sender];
+}
+
+#pragma-mark Chap. 21
+
+- (int)numberOfLines
+{
+    int count;
+    
+    // Check that they are non-nil before we add their counts...
+    if (linesInProcess && completeLines)
+        count = [linesInProcess count] + [completeLines count];
+    
+    return count;
 }
 
 @end
