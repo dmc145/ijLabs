@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C320E98D180D656E00C967BF /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C320E98F180D656E00C967BF /* DetailViewController.xib */; };
+		C320E995180D690E00C967BF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C320E997180D690E00C967BF /* Localizable.strings */; };
 		C3995EAD1806AC2C00AA35C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3995EAB1806AC2C00AA35C0 /* DetailViewController.m */; };
 		C3995EB21806E24300AA35C0 /* DateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3995EB01806E24300AA35C0 /* DateViewController.m */; };
 		C3995EB31806E24300AA35C0 /* DateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3995EB11806E24300AA35C0 /* DateViewController.xib */; };
@@ -53,6 +54,8 @@
 		C320E990180D659200C967BF /* es */ = {isa = PBXFileReference; lastKnownFileType = file; name = es; path = es.lproj/DetailViewController.xib; sourceTree = "<group>"; };
 		C320E991180D659200C967BF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C320E992180D659200C967BF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C320E996180D690E00C967BF /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C320E998180D691400C967BF /* es */ = {isa = PBXFileReference; lastKnownFileType = file; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C3995EAA1806AC2C00AA35C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		C3995EAB1806AC2C00AA35C0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		C3995EAF1806E24300AA35C0 /* DateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateViewController.h; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 		C3A4EE3E1805571700730E3F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C320E997180D690E00C967BF /* Localizable.strings */,
 				C3A4EE3F1805571700730E3F /* Homepwner-Info.plist */,
 				C3A4EE401805571700730E3F /* InfoPlist.strings */,
 				C3A4EE431805571700730E3F /* main.m */,
@@ -298,6 +302,7 @@
 				C3A3144B180C464C0078785D /* HomepwnerItemCell.xib in Resources */,
 				C3A31450180D188B0078785D /* ImageViewController.xib in Resources */,
 				C3A4EE421805571700730E3F /* InfoPlist.strings in Resources */,
+				C320E995180D690E00C967BF /* Localizable.strings in Resources */,
 				C3A4EE4A1805571700730E3F /* Images.xcassets in Resources */,
 				C320E98D180D656E00C967BF /* DetailViewController.xib in Resources */,
 				C3A3143F180BD1DE0078785D /* CrossHair.xib in Resources */,
@@ -361,6 +366,15 @@
 				C320E990180D659200C967BF /* es */,
 			);
 			name = DetailViewController.xib;
+			sourceTree = "<group>";
+		};
+		C320E997180D690E00C967BF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C320E996180D690E00C967BF /* en */,
+				C320E998180D691400C967BF /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		C3A4EE401805571700730E3F /* InfoPlist.strings */ = {
