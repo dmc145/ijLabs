@@ -198,12 +198,26 @@
 {
     UITouch *t = [touches anyObject];
     CGPoint p = [t locationInView:self];
-    [boxLayer setPosition:p];
+    
+    /**/
+    CABasicAnimation *ba = [CABasicAnimation animationWithKeyPath:@"position"];
+    [ba setFromValue:[NSValue valueWithCGPoint:[boxLayer position]]];
+    [ba setToValue:[NSValue valueWithCGPoint:p]];
+    [ba setDuration:3.0];
+    /**/
+    
+    // [boxLayer setPosition:p]; // common error to forget update model layer (after presentation layer animation)
+    
+    /**/
+    // Add animation that will gradually update presentation layer
+    [boxLayer addAnimation:ba forKey:@"foo"];
+    /**/
 }
 
 - (void)touchesMoved:(NSSet *)touches
            withEvent:(UIEvent *)event
 {
+    /**
     UITouch *t = [touches anyObject];
     CGPoint p = [t locationInView:self];
     
@@ -213,7 +227,7 @@
         [boxLayer setPosition:p];
     
     [CATransaction commit];
-
+     **/
 }
 
 @end
