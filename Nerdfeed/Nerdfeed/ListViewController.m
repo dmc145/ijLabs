@@ -9,9 +9,20 @@
 #import "ListViewController.h"
 #import "RSSChannel.h"
 #import "RSSItem.h"
+#import "WebViewController.h"
 
 
 @implementation ListViewController
+
+@synthesize webViewController;
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
+{
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        return YES;
+    return io == UIInterfaceOrientationPortrait;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -32,6 +43,36 @@
     [[cell textLabel] setText:[item title]];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (![self splitViewController])
+    {
+        // Push the web view controller onto the navigation stack - this implicitly
+        // creates the web view controller's view the first time through
+        [[self navigationController] pushViewController:webViewController animated:YES];
+    }
+    
+    // Grab the selected item
+    RSSItem *entry = [[channel items] objectAtIndex:[indexPath row]];
+    
+    /*
+    // Construct a URL with the link string of the item
+    NSURL *url = [NSURL URLWithString:[entry link]];
+    
+    // Construct a requst object with that URL
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    
+    // Load the request into the web view
+    [[webViewController webView] loadRequest:req];
+    
+    // Set the title of the web view controller's navigation item
+    [[webViewController navigationItem] setTitle:[entry title]];
+     */
+    [webViewController listViewController:self handleObject:entry];
+
 }
 
 - (void)fetchEntries

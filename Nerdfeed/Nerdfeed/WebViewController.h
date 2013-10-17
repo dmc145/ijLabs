@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WebViewController : NSObject
+// Must import this file as it is where ListViewControllerDelegate is declared
+#import "ListViewController.h"
+
+@interface WebViewController : UIViewController <ListViewControllerDelegate>
+
+@property (nonatomic, readonly) UIWebView *webView;
 
 @end

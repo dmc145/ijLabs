@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class RSSChannel;
+@class WebViewController;
 
 @interface ListViewController : UITableViewController <NSXMLParserDelegate>
 
@@ -19,6 +20,16 @@
     RSSChannel *channel;
 }
 
+@property (nonatomic, strong) WebViewController *webViewController;
+
 - (void)fetchEntries;
+
+@end
+
+// A new protocol named ListViewControllerDelegate
+@protocol ListViewControllerDelegate
+
+// Classes that conform to this protocol must implement this method:
+- (void)listViewController:(ListViewController *)lvc handleObject:(id)object;
 
 @end

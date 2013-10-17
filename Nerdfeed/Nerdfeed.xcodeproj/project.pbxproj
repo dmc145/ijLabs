@@ -22,6 +22,7 @@
 		C34AEE1D180ED8D900813D54 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34AEE1C180ED8D900813D54 /* ListViewController.m */; };
 		C34AEE20180EE83800813D54 /* RSSChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = C34AEE1F180EE83800813D54 /* RSSChannel.m */; };
 		C34AEE23180EF6D900813D54 /* RSSItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C34AEE22180EF6D900813D54 /* RSSItem.m */; };
+		C34AEE26180EFB2800813D54 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34AEE25180EFB2800813D54 /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		C34AEE1F180EE83800813D54 /* RSSChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSChannel.m; sourceTree = "<group>"; };
 		C34AEE21180EF6D900813D54 /* RSSItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSItem.h; sourceTree = "<group>"; };
 		C34AEE22180EF6D900813D54 /* RSSItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSItem.m; sourceTree = "<group>"; };
+		C34AEE24180EFB2800813D54 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		C34AEE25180EFB2800813D54 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				C34AEE1F180EE83800813D54 /* RSSChannel.m */,
 				C34AEE21180EF6D900813D54 /* RSSItem.h */,
 				C34AEE22180EF6D900813D54 /* RSSItem.m */,
+				C34AEE24180EFB2800813D54 /* WebViewController.h */,
+				C34AEE25180EFB2800813D54 /* WebViewController.m */,
 			);
 			path = Nerdfeed;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C34AEE20180EE83800813D54 /* RSSChannel.m in Sources */,
+				C34AEE26180EFB2800813D54 /* WebViewController.m in Sources */,
 				C34AEE23180EF6D900813D54 /* RSSItem.m in Sources */,
 				C34AEDF6180ED88C00813D54 /* main.m in Sources */,
 				C34AEDFA180ED88C00813D54 /* NerdfeedAppDelegate.m in Sources */,
@@ -462,6 +468,7 @@
 				C34AEE14180ED88C00813D54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C34AEE15180ED88C00813D54 /* Build configuration list for PBXNativeTarget "NerdfeedTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +477,7 @@
 				C34AEE17180ED88C00813D54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
