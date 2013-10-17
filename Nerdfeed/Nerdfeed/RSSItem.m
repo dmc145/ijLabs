@@ -42,8 +42,11 @@ didStartElement:(NSString *)elementName
 {
     currentString = nil;
     
-    if ([elementName isEqual:@"item"])
+    if ([elementName isEqual:@"item"]
+        || [elementName isEqual:@"entry"]) {
+     
         [parser setDelegate:parentParserDelegate];
+    }
 }
 
 @end

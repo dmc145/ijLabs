@@ -10,11 +10,41 @@
 #import "RSSChannel.h"
 #import "RSSItem.h"
 #import "WebViewController.h"
+#import "ChannelViewController.h"
+#import "BNRFeedStore.h"
 
 
 @implementation ListViewController
 
 @synthesize webViewController;
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        
+        UIBarButtonItem *bbi =
+        [[UIBarButtonItem alloc] initWithTitle:@"Info"
+                                         style:UIBarButtonItemStyleBordered
+                                        target:self
+                                        action:@selector(showInfo:)];
+        
+        [[self navigationItem] setRightBarButtonItem:bbi];
+        
+        UISegmentedControl *rssTypeControl =
+        [[UISegmentedControl alloc] initWithItems:
+         [NSArray arrayWithObjects:@"BNR", @"Apple", nil]];
+        [rssTypeControl setSelectedSegmentIndex:0];
+        [rssTypeControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+        [rssTypeControl addTarget:self
+                           action:@selector(changeType:)
+                 forControlEvents:UIControlEventValueChanged];
+        [[self navigationItem] setTitleView:rssTypeControl];
+        
+        [self fetchEntries];
+    }
+    return self;
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)io
 {
@@ -53,7 +83,23 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         // Push the web view controller onto the navigation stack - this implicitly
         // creates the web view controller's view the first time through
         [[self navigationController] pushViewController:webViewController animated:YES];
+    } else {
+        // We have to create a new navigation controller, as the old one
+        // was only retained by the split view controller and is now gone
+        UINavigationController *nav =
+        [[UINavigationController alloc] initWithRootViewController:webViewController];
+        
+        NSArray *vcs = [NSArray arrayWithObjects:[self navigationController],
+                        nav,
+                        nil];
+        
+        [[self splitViewController] setViewControllers:vcs];
+        
+        // Make the detail view controller the delegate of the split view controller
+        // - ignore this warning
+        [[self splitViewController] setDelegate:webViewController];
     }
+
     
     // Grab the selected item
     RSSItem *entry = [[channel items] objectAtIndex:[indexPath row]];
@@ -77,93 +123,89 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)fetchEntries
 {
-    xmlData = [[NSMutableData alloc] init];
+    void (^completionBlock)(RSSChannel *obj, NSError *err) =
+    ^(RSSChannel *obj, NSError *err) {
+        // When the request completes, this block will be called.
+        
+        if (!err) {
+            // If everything went ok, grab the channel object and
+            // reload the table.
+            channel = obj;
+            [[self tableView] reloadData];
+        } else {
+            
+            // If things went bad, show an alert view
+            NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@",
+                                     [err localizedDescription]];
+            
+            // Create and show an alert view with this error displayed
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:errorString
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+            [av show];
+        }
+    };
     
-    NSURL *url = [NSURL URLWithString:
-                  @"http://forums.bignerdranch.com/smartfeed.php?"
-                  @"limit=1_DAY&sort_by=standard&feed_type=RSS2.0&feed_style=COMPACT"];
-    
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
-    
-    connection = [[NSURLConnection alloc] initWithRequest:req
-                                                 delegate:self
-                                         startImmediately:YES];
+    // Initiate the request...
+    if (rssType == ListViewControllerRSSTypeBNR)
+        [[BNRFeedStore sharedStore] fetchRSSFeedWithCompletion:completionBlock];
+    else if (rssType == ListViewControllerRSSTypeApple)
+        [[BNRFeedStore sharedStore] fetchTopSongs:10
+                                   withCompletion:completionBlock];
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (void)showInfo:(id)sender
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        [self fetchEntries];
+    // Create the channel view controller
+    ChannelViewController *channelViewController = [[ChannelViewController alloc]
+                                                    initWithStyle:UITableViewStyleGrouped];
+    
+    if ([self splitViewController]) {
+        UINavigationController *nvc = [[UINavigationController alloc]
+                                       initWithRootViewController:channelViewController];
+        
+        // Create an array with our nav controller and this new VC's nav controller
+        NSArray *vcs = [NSArray arrayWithObjects:[self navigationController],
+                        nvc,
+                        nil];
+        
+        // Grab a pointer to the split view controller
+        // and reset its view controllers array.
+        [[self splitViewController] setViewControllers:vcs];
+        
+        // Make detail view controller the delegate of the split view controller
+        // - ignore this warning
+        [[self splitViewController] setDelegate:channelViewController];
+        
+        // If a row has been selected, deselect it so that a row
+        // is not selected when viewing the info
+        NSIndexPath *selectedRow = [[self tableView] indexPathForSelectedRow];
+        if (selectedRow)
+            [[self tableView] deselectRowAtIndexPath:selectedRow animated:YES];
+    } else {
+        [[self navigationController] pushViewController:channelViewController
+                                               animated:YES];
     }
-    return self;
+    
+    // Give the VC the channel object through the protocol message
+    [channelViewController listViewController:self handleObject:channel];
 }
+
+- (void)changeType:(id)sender
+{
+    rssType = [sender selectedSegmentIndex];
+    [self fetchEntries];
+}
+
 
 #pragma-mark NSURLConnection delegate
 
-- (void)connection:(NSURLConnection *)conn didReceiveData:(NSData *)data
-{
-    [xmlData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)conn
-{
-    /*
-    NSString *xmlCheck = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
-    NSLog(@"xmlCheck = %@", xmlCheck);
-     */
-    
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:xmlData];
-    [parser setDelegate:self];
-    [parser parse];
-    
-    // Release...
-    xmlData = nil;
-    connection = nil;
-    
-    [[self tableView] reloadData];
-    WSLog(@"%@\n %@\n %@\n", channel, [channel title], [channel infoString]);
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    // Release...
-    connection = nil;
-    xmlData = nil;
-    
-    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@",
-                             [error localizedDescription]];
-    
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                 message:errorString
-                                                delegate:nil
-                                       cancelButtonTitle:@"OK"
-                                       otherButtonTitles:nil];
-    
-    [av show];
-}
+// moved
 
 #pragma-mark NSXMLParserDelegate
 
-- (void)parser:(NSXMLParser *)parser
-didStartElement:(NSString *)elementName
-  namespaceURI:(NSString *)namespaceURI
- qualifiedName:(NSString *)qualifiedName
-    attributes:(NSDictionary *)attributeDict
-{
-    WSLog(@"%@ found a %@ element", self, elementName);
-    if ([elementName isEqual:@"channel"]) {
-        
-        // If the parser saw a channel, create new instance, store in our ivar
-        channel = [[RSSChannel alloc] init];
-        
-        // Give the channel object a pointer back to ourselves for later
-        [channel setParentParserDelegate:self];
-        
-        // Set the parser's delegate to the channel object
-        // There will be a warning here, ignore it warning for now
-        [parser setDelegate:channel];
-    }
-}
+// moved
 
 @end
