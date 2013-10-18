@@ -26,6 +26,8 @@
 		C3BA75DB180FCD6C005D1531 /* ChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BA75DA180FCD6C005D1531 /* ChannelViewController.m */; };
 		C3BA761C18101A41005D1531 /* BNRFeedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BA761B18101A41005D1531 /* BNRFeedStore.m */; };
 		C3BA761F18101F30005D1531 /* BNRConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BA761E18101F30005D1531 /* BNRConnection.m */; };
+		C3BA762218113995005D1531 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3BA762118113995005D1531 /* CoreData.framework */; };
+		C3BA762518113B5C005D1531 /* Nerdfeed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3BA762318113B5C005D1531 /* Nerdfeed.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,9 @@
 		C3BA761B18101A41005D1531 /* BNRFeedStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRFeedStore.m; sourceTree = "<group>"; };
 		C3BA761D18101F30005D1531 /* BNRConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRConnection.h; sourceTree = "<group>"; };
 		C3BA761E18101F30005D1531 /* BNRConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRConnection.m; sourceTree = "<group>"; };
+		C3BA762018102B5F005D1531 /* JSONSerializable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONSerializable.h; sourceTree = "<group>"; };
+		C3BA762118113995005D1531 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C3BA762418113B5C005D1531 /* Nerdfeed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nerdfeed.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BA762218113995005D1531 /* CoreData.framework in Frameworks */,
 				C34AEDEC180ED88C00813D54 /* CoreGraphics.framework in Frameworks */,
 				C34AEDEE180ED88C00813D54 /* UIKit.framework in Frameworks */,
 				C34AEDEA180ED88C00813D54 /* Foundation.framework in Frameworks */,
@@ -117,6 +123,7 @@
 		C34AEDE8180ED88C00813D54 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3BA762118113995005D1531 /* CoreData.framework */,
 				C34AEDE9180ED88C00813D54 /* Foundation.framework */,
 				C34AEDEB180ED88C00813D54 /* CoreGraphics.framework */,
 				C34AEDED180ED88C00813D54 /* UIKit.framework */,
@@ -146,6 +153,8 @@
 				C3BA761B18101A41005D1531 /* BNRFeedStore.m */,
 				C3BA761D18101F30005D1531 /* BNRConnection.h */,
 				C3BA761E18101F30005D1531 /* BNRConnection.m */,
+				C3BA762018102B5F005D1531 /* JSONSerializable.h */,
+				C3BA762318113B5C005D1531 /* Nerdfeed.xcdatamodeld */,
 			);
 			path = Nerdfeed;
 			sourceTree = "<group>";
@@ -275,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BA762518113B5C005D1531 /* Nerdfeed.xcdatamodeld in Sources */,
 				C34AEE20180EE83800813D54 /* RSSChannel.m in Sources */,
 				C34AEE26180EFB2800813D54 /* WebViewController.m in Sources */,
 				C34AEE23180EF6D900813D54 /* RSSItem.m in Sources */,
@@ -500,6 +510,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C3BA762318113B5C005D1531 /* Nerdfeed.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C3BA762418113B5C005D1531 /* Nerdfeed.xcdatamodel */,
+			);
+			currentVersion = C3BA762418113B5C005D1531 /* Nerdfeed.xcdatamodel */;
+			path = Nerdfeed.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C34AEDDE180ED88C00813D54 /* Project object */;
 }

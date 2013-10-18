@@ -122,5 +122,72 @@ didStartElement:(NSString *)elementName
     }
 }
 
+- (void)readFromJSONDictionary:(NSDictionary *)d
+{
+    // The top-level object contains a "feed" object, which is the channel.
+    NSDictionary *feed = [d objectForKey:@"feed"];
+    
+    // The feed has a title property, make this the title of our channel.
+    [self setTitle:[feed objectForKey:@"title"]];
+    
+    // The feed also has an array of entries, for each one, make a new RSSItem.
+    NSArray *entries = [feed objectForKey:@"entry"];
+    for (NSDictionary *entry in entries) {
+        RSSItem *i = [[RSSItem alloc] init];
+        
+        // Pass the entry dictionary to the item so it can grab its ivars
+        [i readFromJSONDictionary:entry];
+        
+        [items addObject:i];
+    }
+}
+
+- (void)addItemsFromChannel:(RSSChannel *)otherChannel
+{
+    for (RSSItem *i in [otherChannel items]) {
+        
+        // If self's items does not contain this item, add it
+        if (![[self items] containsObject:i])
+            [[self items] addObject:i];
+    }
+    
+    // Sort the array of items by publication date
+    [[self items] sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [[obj2 publicationDate] compare:[obj1 publicationDate]];
+    }];
+}
+
+#pragma-mark NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:items forKey:@"items"];
+    [aCoder encodeObject:title forKey:@"title"];
+    [aCoder encodeObject:infoString forKey:@"infoString"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self) {
+        items = [aDecoder decodeObjectForKey:@"items"];
+        [self setInfoString:[aDecoder decodeObjectForKey:@"infoString"]];
+        [self setTitle:[aDecoder decodeObjectForKey:@"title"]];
+    }
+    return self;
+}
+
+#pragma-mark NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    RSSChannel *c = [[[self class] alloc] init];
+    
+    [c setTitle:[self title]];
+    [c setInfoString:[self infoString]];
+    c->items = [items mutableCopy];
+    
+    return c;
+}
 
 @end
